@@ -9,13 +9,3 @@ export const fetchRandomQuote = async (URL) => {
         throw error;
     }
 };
-/*
-export const fetchQuotesByAuthor = async (author) => {
-    try {
-        const response = await axios.get(`${URL}/author/${author}`);
-        return response.data;
-    } catch (error) {
-        console.error(`Error fetching quotes by ${author}:`, error);
-        throw error;
-    }
-};*/

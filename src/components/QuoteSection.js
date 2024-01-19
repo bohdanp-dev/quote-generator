@@ -1,63 +1,57 @@
 import {useEffect, useState} from "react";
-import {fetchRandomQuote} from "../api/quotesApi";
-import {API_ADVICESLIP_URL_RANDOM, API_DICTUM_URL_RANDOM, API_QUOTEGARDEN_URL_RANDOM} from "../utils/baseApiUrls";
-import normalizeQuoteData from "../utils/normalizeQuoteData";
+import {API_ADVICESLIP_URL_RANDOM} from "../utils/baseApiUrls";
+import { IoReload } from "react-icons/io5";
+import './QuoteSection.css'
+import QuoteDisplay from "./QuoteDisplay";
+import QuoteSource from "./QuoteSource";
+import {loadQuote} from "../utils/loadQuote";
+import SocialShare from "./SocialShare";
 
 function QuoteSection() {
     const [quote, setQuote] = useState({});
     const [isQuoteLoading, setIsQuoteLoading] = useState(false)
     const [quoteUrl, setQuoteUrl] = useState(API_ADVICESLIP_URL_RANDOM)
 
-    const loadQuote = (url) =>{
+    useEffect(() => {
+        const fetchQuote = async () => {
+            setIsQuoteLoading(true);
+            const { quoteData, error } = await loadQuote(quoteUrl);
+            if (error) {
+                console.error("ERROR LOADING QUOTE" + error)
+            } else {
+                setQuote(quoteData);
+            }
+            setIsQuoteLoading(false);
+        };
+
+        fetchQuote();
+    }, [quoteUrl]);
+
+    const reloadQuote = async(url) =>{
         setIsQuoteLoading(true);
-
-        fetchRandomQuote(url)
-            .then( data =>{
-                setTimeout(()=>{
-                    setIsQuoteLoading(false);
-                    setQuote(normalizeQuoteData(data, url));
-                },400)
-
-            })
-            .catch(error => {
-                setTimeout(()=>{
-                    setIsQuoteLoading(false);
-                    console.error('Failed to fetch quote:', error);
-                },400)
-            });
+        const { quoteData, error } = await loadQuote(quoteUrl);
+        if (error) {
+            console.error('Error reloading quote:', error);
+        } else {
+            setQuote(quoteData);
+        }
+        setIsQuoteLoading(false);
     }
 
-    useEffect(()=>{
-        loadQuote(quoteUrl)
-    },[quoteUrl])
-
     return (
-        <section>
-            {/*make it a separate component as well*/}
-            <div>
-                <button
-                    disabled={quoteUrl === API_QUOTEGARDEN_URL_RANDOM}
-                    onClick={()=>setQuoteUrl(API_QUOTEGARDEN_URL_RANDOM)}
-                >
-                    QuoteGarden
-                </button>
-                <button
-                    disabled={quoteUrl === API_ADVICESLIP_URL_RANDOM}
-                    onClick={()=>setQuoteUrl(API_ADVICESLIP_URL_RANDOM)}
-                >
-                    AdviceSlip
-                </button>
+        <section className="card-container">
+            <QuoteSource quoteUrl={quoteUrl} isQuoteLoading={isQuoteLoading} setQuoteUrl={setQuoteUrl}/>
+            <QuoteDisplay isQuoteLoading={isQuoteLoading} quote={quote}/>
+
+            <div className="social-reload-bar align-self-center">
+                <SocialShare url={quote.quote + (quote.author ? ` \n- ${quote.author}` : '')} />
+                <div className={`margin-16 border-16 reload-icon-outer-div icon-size-48 ${isQuoteLoading ? 'disabled' : ''}`}>
+                    <IoReload
+                        className="reload-icon icon-size-48 hover-pointer"
+                        onClick={()=>reloadQuote(quoteUrl)}
+                    />
+                </div>
             </div>
-            {/*make it a separate component*/}
-            <div>
-                {isQuoteLoading ? "LOADING" : (
-                    <>
-                        <div>{quote.quote}</div>
-                        {quote.author && <div>- {quote.author}</div>}
-                    </>
-                )}
-            </div>
-            <button disabled={isQuoteLoading} onClick={()=>loadQuote(quoteUrl)}>Load new quote</button>
         </section>
     );
 }

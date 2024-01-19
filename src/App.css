@@ -1,0 +1,27 @@
+.margin-16{
+    margin: 16px 16px;
+}
+.align-self-center{
+    align-self: center;
+}
+.align-self-end{
+    align-self: end;
+}
+.border-16{
+    border-radius: 16px;
+}
+.no-padding{
+    padding: 0;
+}
+
+.icon-size-48 {
+    height: 48px;
+    width: 48px;
+}
+
+
+@media (hover: hover) and (pointer: fine) {
+    .hover-pointer:hover{
+        cursor: pointer;
+    }
+}

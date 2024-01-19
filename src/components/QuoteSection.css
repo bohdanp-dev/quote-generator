@@ -1,5 +1,26 @@
+.card-container {
+    width: 600px;
+    min-height: 500px;
+    background-color: #bdc3c7;
+    border-radius: 16px;
+    margin: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.reload-icon-outer-div {
+    background-color: #425663;
+}
 
+.reload-icon-outer-div.disabled {
+    background-color: #6C7E85;
+}
 
-.quote-container{
+.reload-icon {
+    color: white;
+}
 
+.social-reload-bar {
+    display: flex;
+    justify-content: center;
 }
