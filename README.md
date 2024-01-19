@@ -1,4 +1,25 @@
-# Getting Started with Create React App
+# React Quote Generator 📘
+
+This React-based web application displays random quotes by fetching data from the Quote Garden and Advice Slip APIs. It's responsive, ensuring a good user experience on mobile, tablet, and desktop screens. Styled with plain CSS and deployed on Vercel, this project is part of my junior developer portfolio.
+
+## Features 🌟
+
+- **API Integration**: Fetches quotes from [Quote Garden](https://quote-garden.onrender.com) and [Advice Slip](https://api.adviceslip.com) APIs.
+- **Responsive Design**: Adapts smoothly to different screen sizes.
+- **User-Friendly Interface**: Simple and clean UI designed with CSS.
+- **Deployment**: Hosted on Vercel for reliable and fast access.
+
+## Built With 🔨
+
+- **[React.js](https://reactjs.org/)**: For building the user interface.
+- **CSS**: For styling.
+- **[Quote Garden API](https://quote-garden.onrender.com)**: Source of inspirational quotes.
+- **[Advice Slip API](https://api.adviceslip.com)**: Source of advice quotes.
+- **[Vercel](https://vercel.com/)**: Deployment and hosting platform.
+
+## Getting Started
+
+To get a local copy up and running, follow these simple steps.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
