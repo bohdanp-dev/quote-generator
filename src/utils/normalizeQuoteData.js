@@ -1,4 +1,4 @@
-import {API_ADVICESLIP_URL_RANDOM, API_DICTUM_URL_RANDOM, API_QUOTEGARDEN_URL_RANDOM} from "./baseApiUrls";
+import {API_ADVICESLIP_URL_RANDOM, API_QUOTEGARDEN_URL_RANDOM} from "./baseApiUrls";
 
 function normalizeQuoteData(apiResponse, source) {
     // Depending on the source, extract and standardize the quote data

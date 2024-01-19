@@ -27,7 +27,7 @@ function QuoteSection() {
         fetchQuote();
     }, [quoteUrl]);
 
-    const reloadQuote = async(url) =>{
+    const reloadQuote = async() =>{
         setIsQuoteLoading(true);
         const { quoteData, error } = await loadQuote(quoteUrl);
         if (error) {
@@ -48,7 +48,7 @@ function QuoteSection() {
                 <div className={`margin-16 border-16 reload-icon-outer-div icon-size-48 ${isQuoteLoading ? 'disabled' : ''}`}>
                     <IoReload
                         className="reload-icon icon-size-48 hover-pointer"
-                        onClick={()=>reloadQuote(quoteUrl)}
+                        onClick={()=>reloadQuote()}
                     />
                 </div>
             </div>
